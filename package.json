@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/OssiHela/fullstack-app-2021/issues"
   },
-  "homepage": "https://github.com/OssiHela/fullstack-app-2021#readme"
+  "homepage": "https://github.com/OssiHela/fullstack-app-2021#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^11.0.0",
+    "express": "^4.17.2",
+    "jsonschema": "^1.4.0",
+    "mysql": "^2.18.1"
+  }
 }
