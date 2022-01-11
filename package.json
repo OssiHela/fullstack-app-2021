@@ -1,0 +1,20 @@
+{
+  "name": "fullstack-app-2021",
+  "version": "1.0.0",
+  "description": "> App that is produced as a student project to learn about fullstack development.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OssiHela/fullstack-app-2021.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OssiHela/fullstack-app-2021/issues"
+  },
+  "homepage": "https://github.com/OssiHela/fullstack-app-2021#readme"
+}
