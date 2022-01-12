@@ -4,11 +4,39 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import CssBaseline from "@mui/material/CssBaseline";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import {
+  createTheme,
+  ThemeProvider,
+  responsiveFontSizes,
+} from "@mui/material/styles";
+
+function DarkTheme() {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark");
+
+  let theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: prefersDarkMode ? "dark" : "light",
+        },
+      }),
+    [prefersDarkMode]
+  );
+
+  theme = responsiveFontSizes(theme);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
+  );
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <CssBaseline />
-    <App />
+    <DarkTheme />
   </React.StrictMode>,
   document.getElementById("root")
 );
