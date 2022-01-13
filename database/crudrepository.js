@@ -47,9 +47,6 @@ let connectionFunctions = {
     const saveQuery = `INSERT INTO words (type, word, solution) VALUES (${word.tag},${word.english},${word.finnish})`;
 
     const validation = validator.validate(word, wordSchema);
-    if (validation.errors.length > 0) {
-      console.log(validation.errors);
-    }
 
     function func(resolve, reject) {
       pool.getConnection((err, connection) => {
@@ -72,6 +69,32 @@ let connectionFunctions = {
       });
     }
 
+    return new Promise(func);
+  },
+  editById: (id, word) => {
+    const editByIdQuery = `UPDATE words SET tag = "${word.tag}", english = "${word.english}", finnish = "${word.finnish}" WHERE id = ${id}`;
+    const validation = validator.validate(word, wordSchema);
+
+    function func(resolve, reject) {
+      pool.getConnection((err, connection) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (validation.errors.length < 1) {
+            connection.query(editByIdQuery, (err) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve("Word edited successfully!");
+              }
+            });
+          } else {
+            reject(validation.errors);
+          }
+        }
+        connection.release();
+      });
+    }
     return new Promise(func);
   },
   // Searches the database for all words
