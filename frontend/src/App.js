@@ -28,18 +28,42 @@ export default class App extends Component {
     }
   }
 
-  addScore(amount) {
-    this.setState((state) => ({
-      score: state.score + amount,
-    }));
+  async addScore(amount, wordId, solution) {
+    let wordToEdit = {
+      key: null,
+      word: null,
+    };
+    for (let key in this.state.words) {
+      if (this.state.words[key].id === wordId) {
+        wordToEdit.key = key;
+        wordToEdit.word = this.state.words[key];
+      }
+    }
+
+    let words = this.state.words;
+
+    const newWord = {
+      ...wordToEdit.word,
+      solved: solution,
+    };
+
+    words[wordToEdit.key] = newWord;
+
+    return new Promise((resolve) => {
+      this.setState(
+        (state) => ({
+          score: state.score + amount,
+          words: words,
+        }),
+        resolve
+      );
+    });
   }
 
   async getWordsRequest() {
     const response = await fetch("http://localhost:8080/words");
     const data = await response.json();
-    this.setState({ words: data }, () => {
-      console.log(this.state.words.map((word) => word.word));
-    });
+    this.setState({ words: data });
   }
 
   render() {
