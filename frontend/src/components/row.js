@@ -18,8 +18,8 @@ export default class Row extends Component {
   async checkAnswer() {
     const solution =
       this.props.language === "eng"
-        ? this.props.word.solution
-        : this.props.word.word;
+        ? this.props.word.finnish
+        : this.props.word.english;
     if (this.state.solution.toLowerCase() === solution.toLowerCase()) {
       if (!this.props.word.solved) {
         await this.props.addScore(5, this.props.word.id, this.state.solution);
@@ -68,8 +68,8 @@ export default class Row extends Component {
           align="center"
         >
           {this.props.language === "eng"
-            ? this.props.word.word
-            : this.props.word.solution}
+            ? this.props.word.english
+            : this.props.word.finnish}
         </TableCell>
         <TableCell
           sx={{
