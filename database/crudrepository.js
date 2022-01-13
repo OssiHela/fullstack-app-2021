@@ -15,13 +15,13 @@ const pool = mysql.createPool({
 const wordSchema = {
   type: "object",
   properties: {
-    type: {
+    tag: {
       type: "string",
     },
-    word: {
+    english: {
       type: "string",
     },
-    solution: {
+    finnish: {
       type: "string",
     },
   },
@@ -44,7 +44,7 @@ let connectionFunctions = {
   },
   // Saves a word to the database
   save: (word) => {
-    const saveQuery = `INSERT INTO words (type, word, solution) VALUES (${word.type},${word.word},${word.solution})`;
+    const saveQuery = `INSERT INTO words (type, word, solution) VALUES (${word.tag},${word.english},${word.finnish})`;
 
     const validation = validator.validate(word, wordSchema);
     if (validation.errors.length > 0) {
@@ -142,8 +142,8 @@ let connectionFunctions = {
     return new Promise(func);
   },
   // Searches the database for words with a certain type
-  findByType: (type) => {
-    const findByTypeQuery = `SELECT * FROM words WHERE type="${type}"`;
+  findByType: (tag) => {
+    const findByTypeQuery = `SELECT * FROM words WHERE tag="${tag}"`;
     function func(resolve, reject) {
       pool.getConnection((err, connection) => {
         if (err) {
@@ -154,7 +154,7 @@ let connectionFunctions = {
               reject(err);
             } else {
               if (words.length <= 0) {
-                reject({ msg: `could not find words with type = ${type}` });
+                reject({ msg: `could not find words with type = ${tag}` });
               }
               resolve(words);
             }
