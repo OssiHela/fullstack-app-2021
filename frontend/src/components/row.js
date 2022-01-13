@@ -20,21 +20,23 @@ export default class Row extends Component {
       this.props.language === "eng"
         ? this.props.word.finnish
         : this.props.word.english;
-    if (this.state.solution.toLowerCase() === solution.toLowerCase()) {
-      if (!this.props.word.solved) {
-        await this.props.addScore(5, this.props.word.id, this.state.solution);
-      }
-      this.setState({ correct: true });
-    } else {
-      if (this.props.word.solved) {
-        if (this.props.word.solved.toLowerCase() === solution.toLowerCase()) {
-          this.setState({ correct: true });
+    if (this.state.solution || this.props.word.solved) {
+      if (this.state.solution.toLowerCase() === solution.toLowerCase()) {
+        if (!this.props.word.solved) {
+          await this.props.addScore(1, this.props.word.id, this.state.solution);
+        }
+        this.setState({ correct: true });
+      } else {
+        if (this.props.word.solved) {
+          if (this.props.word.solved.toLowerCase() === solution.toLowerCase()) {
+            this.setState({ correct: true });
+          } else {
+            this.setState({ correct: false });
+          }
         } else {
+          await this.props.addScore(0, this.props.word.id, this.state.solution);
           this.setState({ correct: false });
         }
-      } else {
-        await this.props.addScore(0, this.props.word.id, this.state.solution);
-        this.setState({ correct: false });
       }
     }
   }
