@@ -104,7 +104,7 @@ export default class Column extends Component {
                     },
                     native: true,
                   }}
-                  count={5}
+                  count={10}
                   page={this.state.page}
                   onPageChange={this.handleChangePage}
                 />
