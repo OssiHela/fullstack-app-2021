@@ -79,7 +79,14 @@ export default class Column extends Component {
             <TableBody>{wordRows}</TableBody>
             <TableFooter>
               <StyledTableRow>
-                <TableCell align="center">
+                <TableCell
+                  align="center"
+                  sx={{
+                    fontSize: "1rem",
+                    margin: 0,
+                    padding: 0,
+                  }}
+                >
                   {this.props.language === "eng" ? "Pisteet: " : "Score: "}
                   {this.props.score}
                 </TableCell>
@@ -87,7 +94,9 @@ export default class Column extends Component {
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
-                      this.setState({ submit: true });
+                      this.setState({ submit: true }, () => {
+                        this.setState({ submit: false });
+                      });
                     }}
                   >
                     {this.props.language === "eng" ? "Tarkista" : "Check"}
@@ -104,7 +113,7 @@ export default class Column extends Component {
                     },
                     native: true,
                   }}
-                  count={10}
+                  count={this.props.words.length}
                   page={this.state.page}
                   onPageChange={this.handleChangePage}
                 />
