@@ -5,7 +5,9 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
+import TableFooter from "@mui/material/TableFooter";
 import TableRow from "@mui/material/TableRow";
+import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
@@ -21,10 +23,31 @@ export default class Column extends Component {
     super(props);
     this.state = {
       submit: false,
+      page: 0,
     };
+
+    this.handleChangePage = this.handleChangePage.bind(this);
+  }
+
+  handleChangePage(event, newPage) {
+    this.setState({ page: newPage, submit: false });
   }
 
   render() {
+    let wordRows = [];
+    if (this.props.words.length > 0 && this.props.words !== undefined) {
+      wordRows = this.props.words
+        .slice(this.state.page * 5, this.state.page * 5 + 5)
+        .map((word) => (
+          <Row
+            word={word}
+            language={this.props.language}
+            addScore={this.props.addScore}
+            submit={this.state.submit}
+            key={word.id}
+          />
+        ));
+    }
     return (
       <div className="column">
         <TableContainer component={Paper} elevation={1}>
@@ -53,16 +76,8 @@ export default class Column extends Component {
                 </TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {this.props.words.map((word, index) => (
-                <Row
-                  word={word}
-                  language={this.props.language}
-                  addScore={this.props.addScore}
-                  submit={this.state.submit}
-                  key={index}
-                />
-              ))}
+            <TableBody>{wordRows}</TableBody>
+            <TableFooter>
               <StyledTableRow>
                 <TableCell align="center">
                   {this.props.language === "eng" ? "Pisteet: " : "Score: "}
@@ -79,7 +94,22 @@ export default class Column extends Component {
                   </Button>
                 </TableCell>
               </StyledTableRow>
-            </TableBody>
+              <StyledTableRow>
+                <TablePagination
+                  rowsPerPage={5}
+                  rowsPerPageOptions={[5]}
+                  SelectProps={{
+                    inputProps: {
+                      "aria-label": "rows per page",
+                    },
+                    native: true,
+                  }}
+                  count={5}
+                  page={this.state.page}
+                  onPageChange={this.handleChangePage}
+                />
+              </StyledTableRow>
+            </TableFooter>
           </Table>
         </TableContainer>
       </div>
