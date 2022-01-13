@@ -7,9 +7,14 @@ export default class App extends Component {
     super(props);
     this.state = {
       words: [],
-      language: "eng",
+      language: localStorage.getItem("language")
+        ? localStorage.getItem("language")
+        : "eng",
       score: 0,
       loading: false,
+      priviledges: localStorage.getItem("user")
+        ? localStorage.getItem("user")
+        : "user",
     };
     this.getWordsRequest = this.getWordsRequest.bind(this);
     this.changeLanguage = this.changeLanguage.bind(this);
@@ -23,8 +28,20 @@ export default class App extends Component {
   changeLanguage() {
     if (this.state.language === "eng") {
       this.setState({ language: "fin" });
+      localStorage.setItem("language", "fin");
     } else {
       this.setState({ language: "eng" });
+      localStorage.setItem("language", "eng");
+    }
+  }
+
+  changeUser() {
+    if (this.state.priviledges === "user") {
+      this.setState({ priviledges: "admin" });
+      localStorage.setItem("user", "admin");
+    } else {
+      this.setState({ priviledges: "user" });
+      localStorage.setItem("user", "user");
     }
   }
 
@@ -75,6 +92,19 @@ export default class App extends Component {
           }}
         >
           {this.state.language === "eng" ? "Vaihda kieli" : "Change language"}
+        </Button>
+        <Button
+          onClick={() => {
+            this.changeUser();
+          }}
+        >
+          {this.state.language === "eng"
+            ? `Vaihda ${
+                this.state.priviledges === "user" ? "admin" : "user"
+              } käyttönäkymään`
+            : `Change to ${
+                this.state.priviledges === "user" ? "admin" : "user"
+              } view`}
         </Button>
         <Column
           words={this.state.words}
