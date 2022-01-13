@@ -47,6 +47,16 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.put("/:index([0-9]+)", async (req, res) => {
+  try {
+    let result = await connection.editById(req.params.index, req.body);
+    res.send(result);
+  } catch (err) {
+    res.statusCode = 400;
+    res.send(err);
+  }
+});
+
 // Closes the database connection
 exports.closeDB = async function () {
   let result = await connection.close();
