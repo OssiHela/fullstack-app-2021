@@ -28,10 +28,12 @@ export default class App extends Component {
     this.addScore = this.addScore.bind(this);
   }
 
+  // When the app loads it will fetch the data from the backend
   componentDidMount() {
     this.getWordsRequest();
   }
 
+  // Handles changing the language between finnish and english and stores it in the browser's localstorage
   changeLanguage() {
     if (this.state.language === "eng") {
       this.setState({ language: "fin" });
@@ -42,6 +44,7 @@ export default class App extends Component {
     }
   }
 
+  // Handles changing the view between user and admin view and stores it in the browser's localstorage
   changeUser() {
     if (this.state.priviledges === "user") {
       this.setState({ priviledges: "admin" });
@@ -52,6 +55,7 @@ export default class App extends Component {
     }
   }
 
+  // Adds score based on the amount and marks the word as solved
   async addScore(amount, wordId, solution) {
     let wordToEdit = {
       key: null,
@@ -84,12 +88,14 @@ export default class App extends Component {
     });
   }
 
+  // Fetches the words from the backend
   async getWordsRequest() {
     const response = await fetch("http://localhost:8080/words");
     const data = await response.json();
     this.setState({ words: data });
   }
 
+  // Saves the edited word to the backend
   async editWordRequest(newWord) {
     let words = this.state.words;
     let wordToEdit = {
@@ -122,6 +128,7 @@ export default class App extends Component {
     }
   }
 
+  // Saves a new word to the backend
   async addWordRequest(tag, english, finnish) {
     if (english && finnish && isNaN(english) && isNaN(finnish)) {
       const newWord = {
@@ -145,6 +152,7 @@ export default class App extends Component {
     }
   }
 
+  // Deletes a existing word from the backend
   async deleteWordRequest(id) {
     let words = this.state.words.filter((word) => word.id !== id);
     this.setState({ words: words });
@@ -164,6 +172,7 @@ export default class App extends Component {
     }
   }
 
+  // Renders the options dropdown menu and admin or user view based on the state
   render() {
     return (
       <div className="content">
