@@ -42,6 +42,7 @@ export default class AdminColumn extends Component {
             word={word}
             language={this.props.language}
             editWord={this.props.editWord}
+            deleteWord={this.props.deleteWord}
             key={word.id}
           />
         ));
