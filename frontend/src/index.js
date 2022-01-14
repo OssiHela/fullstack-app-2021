@@ -4,7 +4,6 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import CssBaseline from "@mui/material/CssBaseline";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import {
   createTheme,
   ThemeProvider,
@@ -12,17 +11,11 @@ import {
 } from "@mui/material/styles";
 
 function DarkTheme() {
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark");
-
-  let theme = React.useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: prefersDarkMode ? "dark" : "light",
-        },
-      }),
-    [prefersDarkMode]
-  );
+  let theme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
 
   theme = responsiveFontSizes(theme);
 
