@@ -71,6 +71,7 @@ let connectionFunctions = {
 
     return new Promise(func);
   },
+  // Updates a already existing word in the database
   editById: (id, word) => {
     const editByIdQuery = `UPDATE words SET tag = "${word.tag}", english = "${word.english}", finnish = "${word.finnish}" WHERE id = ${id}`;
     const validation = validator.validate(word, wordSchema);
