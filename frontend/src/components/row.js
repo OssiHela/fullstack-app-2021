@@ -88,6 +88,7 @@ export default class Row extends Component {
         >
           <TextField
             key={this.props.word.id}
+            autoComplete="off"
             id="standard-basic"
             placeholder={this.props.language === "eng" ? "Vastaus" : "Answer"}
             variant="standard"
