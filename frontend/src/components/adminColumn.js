@@ -9,6 +9,7 @@ import TableFooter from "@mui/material/TableFooter";
 import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
+import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 
@@ -23,6 +24,9 @@ export default class AdminColumn extends Component {
     super(props);
     this.state = {
       page: 0,
+      tag: "",
+      english: "",
+      finnish: "",
     };
 
     this.handleChangePage = this.handleChangePage.bind(this);
@@ -43,81 +47,135 @@ export default class AdminColumn extends Component {
             language={this.props.language}
             editWord={this.props.editWord}
             deleteWord={this.props.deleteWord}
-            key={word.id}
+            key={word.id ? word.id : word}
           />
         ));
     }
     return (
-      <div className="column">
-        <TableContainer component={Paper} elevation={1}>
-          <Table aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell
-                  sx={{
-                    width: 1 / 5,
-                    fontSize: "1.4rem",
-                    backgroundColor: "rgb(0,0,0,0.20)",
-                  }}
-                  align="center"
-                >
-                  {this.props.language === "eng" ? "Tagi" : "Tag"}
-                </TableCell>
-                <TableCell
-                  sx={{
-                    width: 1 / 5,
-                    fontSize: "1.4rem",
-                    backgroundColor: "rgb(0,0,0,0.20)",
-                  }}
-                  align="center"
-                >
-                  English
-                </TableCell>
-                <TableCell
-                  sx={{
-                    width: 1 / 5,
-                    fontSize: "1.4rem",
-                    backgroundColor: "rgb(0,0,0,0.20)",
-                  }}
-                  align="center"
-                >
-                  Finnish
-                </TableCell>
-                <TableCell
-                  sx={{
-                    backgroundColor: "rgb(0,0,0,0.20)",
-                  }}
-                  align="center"
-                />
-                <TableCell
-                  sx={{
-                    backgroundColor: "rgb(0,0,0,0.20)",
-                  }}
-                  align="center"
-                />
-              </TableRow>
-            </TableHead>
-            <TableBody>{wordRows}</TableBody>
-            <TableFooter>
-              <StyledTableRow>
-                <TablePagination
-                  rowsPerPage={10}
-                  rowsPerPageOptions={[10]}
-                  SelectProps={{
-                    inputProps: {
-                      "aria-label": "rows per page",
-                    },
-                    native: true,
-                  }}
-                  count={this.props.words.length}
-                  page={this.state.page}
-                  onPageChange={this.handleChangePage}
-                />
-              </StyledTableRow>
-            </TableFooter>
-          </Table>
-        </TableContainer>
-      </div>
+      <>
+        <div className="addWord">
+          <TextField
+            autoComplete="off"
+            id="standard-basic"
+            placeholder="tag"
+            variant="standard"
+            value={this.state.tag}
+            onChange={(e) => {
+              e.preventDefault();
+              this.setState({ tag: e.target.value });
+            }}
+            inputProps={{ style: { textAlign: "center", fontSize: "1.2rem" } }}
+          />
+          <TextField
+            autoComplete="off"
+            id="standard-basic"
+            placeholder={"english"}
+            variant="standard"
+            value={this.state.english}
+            onChange={(e) => {
+              e.preventDefault();
+              this.setState({ english: e.target.value });
+            }}
+            inputProps={{ style: { textAlign: "center", fontSize: "1.2rem" } }}
+          />
+          <TextField
+            autoComplete="off"
+            id="standard-basic"
+            placeholder="finnish"
+            variant="standard"
+            value={this.state.finnish}
+            onChange={(e) => {
+              e.preventDefault();
+              this.setState({ finnish: e.target.value });
+            }}
+            inputProps={{ style: { textAlign: "center", fontSize: "1.2rem" } }}
+          />
+        </div>
+        <div className="addWordButton">
+          <Button
+            onClick={() => {
+              this.props.addWord(
+                this.state.tag,
+                this.state.english,
+                this.state.finnish
+              );
+              this.setState({ tag: "", english: "", finnish: "" });
+            }}
+          >
+            {this.props.language === "eng" ? "Lisää sana" : "Add word"}
+          </Button>
+        </div>
+        <div className="column">
+          <TableContainer component={Paper} elevation={1}>
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell
+                    sx={{
+                      width: 1 / 5,
+                      fontSize: "1.4rem",
+                      backgroundColor: "rgb(0,0,0,0.20)",
+                    }}
+                    align="center"
+                  >
+                    {this.props.language === "eng" ? "Tagi" : "Tag"}
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      width: 1 / 5,
+                      fontSize: "1.4rem",
+                      backgroundColor: "rgb(0,0,0,0.20)",
+                    }}
+                    align="center"
+                  >
+                    English
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      width: 1 / 5,
+                      fontSize: "1.4rem",
+                      backgroundColor: "rgb(0,0,0,0.20)",
+                    }}
+                    align="center"
+                  >
+                    Finnish
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      backgroundColor: "rgb(0,0,0,0.20)",
+                    }}
+                    align="center"
+                  />
+                  <TableCell
+                    sx={{
+                      backgroundColor: "rgb(0,0,0,0.20)",
+                    }}
+                    align="center"
+                  />
+                </TableRow>
+              </TableHead>
+              <TableBody>{wordRows}</TableBody>
+              <TableFooter>
+                <StyledTableRow>
+                  <TablePagination
+                    rowsPerPage={10}
+                    rowsPerPageOptions={[10]}
+                    SelectProps={{
+                      inputProps: {
+                        "aria-label": "rows per page",
+                      },
+                      native: true,
+                    }}
+                    count={this.props.words.length}
+                    page={this.state.page}
+                    onPageChange={this.handleChangePage}
+                  />
+                </StyledTableRow>
+              </TableFooter>
+            </Table>
+          </TableContainer>
+        </div>
+      </>
     );
   }
 }
