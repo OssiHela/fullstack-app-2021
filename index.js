@@ -12,9 +12,10 @@ app.use(cors());
 app.use("/words", words.wordRouter);
 
 const server = app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Server listening at http://localhost:${port}`);
 });
 
+// Allows windows opertating systems to use the SIGINT and SIGTERM cleanup functions
 if (process.platform === "win32") {
   var rl = require("readline").createInterface({
     input: process.stdin,
@@ -30,6 +31,7 @@ if (process.platform === "win32") {
   });
 }
 
+// Shutsdown the server and rest of the connections
 function cleanup() {
   shutting_down = true;
   server.close(function () {
