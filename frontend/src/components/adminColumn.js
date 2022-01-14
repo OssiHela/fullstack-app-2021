@@ -32,10 +32,12 @@ export default class AdminColumn extends Component {
     this.handleChangePage = this.handleChangePage.bind(this);
   }
 
+  // Handles the page changing
   handleChangePage(event, newPage) {
     this.setState({ page: newPage, submit: false });
   }
 
+  // Renders the admin column and word adding form
   render() {
     let wordRows = [];
     if (this.props.words.length > 0 && this.props.words !== undefined) {
