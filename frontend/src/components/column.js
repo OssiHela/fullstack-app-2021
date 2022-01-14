@@ -35,6 +35,7 @@ export default class Column extends Component {
     this.search = this.search.bind(this);
   }
 
+  // Searches the words for words with the specified tag that is stored in state
   search() {
     if (!this.state.search) {
       return this.props.words;
@@ -45,10 +46,12 @@ export default class Column extends Component {
     }
   }
 
+  // Handles the page changing
   handleChangePage(event, newPage) {
     this.setState({ page: newPage, submit: false });
   }
 
+  // Renders the user column and search form, with option to show tags
   render() {
     let wordRows = [];
     if (this.props.words.length > 0 && this.props.words !== undefined) {
