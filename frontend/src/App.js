@@ -1,6 +1,8 @@
 import Column from "./components/column";
 import AdminColumn from "./components/adminColumn";
-import { Component } from "react";
+import React, { Component } from "react";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 
 export default class App extends Component {
@@ -16,6 +18,7 @@ export default class App extends Component {
       priviledges: localStorage.getItem("user")
         ? localStorage.getItem("user")
         : "user",
+      anchorEl: null,
     };
     this.getWordsRequest = this.getWordsRequest.bind(this);
     this.editWordRequest = this.editWordRequest.bind(this);
@@ -164,26 +167,57 @@ export default class App extends Component {
   render() {
     return (
       <div className="content">
-        <Button
-          onClick={() => {
-            this.changeLanguage();
-          }}
-        >
-          {this.state.language === "eng" ? "Vaihda kieli" : "Change language"}
-        </Button>
-        <Button
-          onClick={() => {
-            this.changeUser();
-          }}
-        >
-          {this.state.language === "eng"
-            ? `Vaihda ${
-                this.state.priviledges === "user" ? "admin" : "user"
-              } käyttönäkymään`
-            : `Change to ${
-                this.state.priviledges === "user" ? "admin" : "user"
-              } view`}
-        </Button>
+        <div className="options">
+          <Button
+            id="basic-button"
+            aria-controls={
+              Boolean(this.state.anchorEl) ? "basic-menu" : undefined
+            }
+            aria-haspopup="true"
+            aria-expanded={Boolean(this.state.anchorEl) ? "true" : undefined}
+            onClick={(e) => {
+              this.setState({ anchorEl: e.currentTarget });
+            }}
+            variant="outlined"
+          >
+            Options
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={this.state.anchorEl}
+            open={Boolean(this.state.anchorEl)}
+            onClose={(e) => {
+              e.preventDefault();
+              this.setState({ anchorEl: null });
+            }}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem
+              onClick={() => {
+                this.changeLanguage();
+              }}
+            >
+              {this.state.language === "eng"
+                ? "Vaihda kieli"
+                : "Change language"}
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                this.changeUser();
+              }}
+            >
+              {this.state.language === "eng"
+                ? `Vaihda ${
+                    this.state.priviledges === "user" ? "admin" : "user"
+                  } käyttönäkymään`
+                : `Change to ${
+                    this.state.priviledges === "user" ? "admin" : "user"
+                  } view`}
+            </MenuItem>
+          </Menu>
+        </div>
         {this.state.priviledges === "user" ? (
           <Column
             words={this.state.words}
