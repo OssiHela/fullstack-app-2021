@@ -57,6 +57,22 @@ export default class Row extends Component {
   render() {
     return (
       <TableRow>
+        {this.props.showTags ? (
+          <TableCell
+            sx={{
+              fontSize: "1rem",
+              backgroundColor:
+                this.state.correct !== null
+                  ? this.state.correct
+                    ? "green"
+                    : "red"
+                  : "transparent",
+            }}
+            align="center"
+          >
+            {this.props.word.tag}
+          </TableCell>
+        ) : null}
         <TableCell
           sx={{
             fontSize: "1rem",
