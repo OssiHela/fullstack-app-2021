@@ -118,7 +118,7 @@ export default class AdminColumn extends Component {
                     }}
                     align="center"
                   >
-                    {this.props.language === "eng" ? "Tagi" : "Tag"}
+                    Tag
                   </TableCell>
                   <TableCell
                     sx={{
