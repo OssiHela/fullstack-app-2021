@@ -8,6 +8,7 @@ body {
 }
 
 .column {
-  max-width: 50em;
+  min-width: 40vw;
+  max-width: 60em;
   margin: 3em auto 3em auto;
 }
