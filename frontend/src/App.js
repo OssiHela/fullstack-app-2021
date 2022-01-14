@@ -19,6 +19,7 @@ export default class App extends Component {
     };
     this.getWordsRequest = this.getWordsRequest.bind(this);
     this.editWordRequest = this.editWordRequest.bind(this);
+    this.addWordRequest = this.addWordRequest.bind(this);
     this.deleteWordRequest = this.deleteWordRequest.bind(this);
     this.changeLanguage = this.changeLanguage.bind(this);
     this.addScore = this.addScore.bind(this);
@@ -118,6 +119,29 @@ export default class App extends Component {
     }
   }
 
+  async addWordRequest(tag, english, finnish) {
+    if (english && finnish && isNaN(english) && isNaN(finnish)) {
+      const newWord = {
+        tag: tag,
+        english: english,
+        finnish: finnish,
+      };
+
+      try {
+        const request = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newWord),
+        };
+        const response = await fetch(`http://localhost:8080/words/`, request);
+        await this.getWordsRequest();
+        console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
+
   async deleteWordRequest(id) {
     let words = this.state.words.filter((word) => word.id !== id);
     this.setState({ words: words });
@@ -173,6 +197,7 @@ export default class App extends Component {
             language={this.state.language}
             editWord={this.editWordRequest}
             deleteWord={this.deleteWordRequest}
+            addWord={this.addWordRequest}
           />
         )}
       </div>
