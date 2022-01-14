@@ -18,6 +18,7 @@ export default class AdminRow extends Component {
     this.saveWord = this.saveWord.bind(this);
   }
 
+  // After editing a word calls the editWordRequest function from app.js with the edited word as its param
   saveWord() {
     const newWord = {
       id: this.props.word.id,
@@ -29,6 +30,7 @@ export default class AdminRow extends Component {
     this.setState({ isEditing: false });
   }
 
+  // Renders a individual tableRow with tag, english word, finnish, edit button and delete button
   render() {
     return (
       <TableRow>
