@@ -113,7 +113,20 @@ export default class AdminRow extends Component {
             <Button
               color="success"
               onClick={() => {
-                this.saveWord();
+                if (
+                  this.state.english.length > 0 &&
+                  this.state.finnish.length > 0 &&
+                  isNaN(this.state.english) &&
+                  isNaN(this.state.finnish)
+                ) {
+                  this.saveWord();
+                } else {
+                  this.setState({
+                    isEditing: false,
+                    english: this.props.word.english,
+                    finnish: this.props.word.finnish,
+                  });
+                }
               }}
             >
               {this.props.language === "eng" ? "Tallenna" : "Save"}
@@ -137,7 +150,12 @@ export default class AdminRow extends Component {
           }}
           align="center"
         >
-          <Button color="error">
+          <Button
+            color="error"
+            onClick={() => {
+              this.props.deleteWord(this.props.word.id);
+            }}
+          >
             {this.props.language === "eng" ? "Poista" : "Delete"}
           </Button>
         </TableCell>
