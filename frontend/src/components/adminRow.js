@@ -41,6 +41,7 @@ export default class AdminRow extends Component {
           {this.state.isEditing ? (
             <TextField
               key={this.props.word.id}
+              autoComplete="off"
               id="standard-basic"
               placeholder={this.props.language === "eng" ? "Vastaus" : "Answer"}
               variant="standard"
@@ -64,6 +65,7 @@ export default class AdminRow extends Component {
           {this.state.isEditing ? (
             <TextField
               key={this.props.word.id}
+              autoComplete="off"
               id="standard-basic"
               placeholder={this.props.language === "eng" ? "Vastaus" : "Answer"}
               variant="standard"
@@ -87,6 +89,7 @@ export default class AdminRow extends Component {
           {this.state.isEditing ? (
             <TextField
               key={this.props.word.id}
+              autoComplete="off"
               id="standard-basic"
               placeholder={this.props.language === "eng" ? "Vastaus" : "Answer"}
               variant="standard"
