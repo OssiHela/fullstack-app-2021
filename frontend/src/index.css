@@ -7,6 +7,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.options button {
+  position: relative;
+  top: 1em;
+  left: 2em;
+}
+
 .addWord {
   display: flex;
   justify-content: center;
