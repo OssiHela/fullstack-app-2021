@@ -11,6 +11,9 @@ import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 const StyledTableRow = styled(TableRow)(() => ({
   "&:last-child td, &:last-child th": {
@@ -24,9 +27,22 @@ export default class Column extends Component {
     this.state = {
       submit: false,
       page: 0,
+      search: "",
+      showTags: false,
     };
 
     this.handleChangePage = this.handleChangePage.bind(this);
+    this.search = this.search.bind(this);
+  }
+
+  search() {
+    if (!this.state.search) {
+      return this.props.words;
+    } else {
+      return this.props.words.filter(
+        (word) => word.tag.toLowerCase() === this.state.search
+      );
+    }
   }
 
   handleChangePage(event, newPage) {
@@ -36,7 +52,7 @@ export default class Column extends Component {
   render() {
     let wordRows = [];
     if (this.props.words.length > 0 && this.props.words !== undefined) {
-      wordRows = this.props.words
+      wordRows = this.search()
         .slice(this.state.page * 5, this.state.page * 5 + 5)
         .map((word) => (
           <Row
@@ -44,6 +60,7 @@ export default class Column extends Component {
             language={this.props.language}
             addScore={this.props.addScore}
             submit={this.state.submit}
+            showTags={this.state.showTags}
             key={word.id}
           />
         ));
@@ -54,9 +71,21 @@ export default class Column extends Component {
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
+                {this.state.showTags ? (
+                  <TableCell
+                    sx={{
+                      width: 1 / 3,
+                      fontSize: "1.4rem",
+                      backgroundColor: "rgb(0,0,0,0.20)",
+                    }}
+                    align="center"
+                  >
+                    Tag
+                  </TableCell>
+                ) : null}
                 <TableCell
                   sx={{
-                    width: 1 / 2,
+                    width: this.state.showTags ? 1 / 3 : 1 / 2,
                     fontSize: "1.4rem",
                     backgroundColor: "rgb(0,0,0,0.20)",
                   }}
@@ -66,7 +95,7 @@ export default class Column extends Component {
                 </TableCell>
                 <TableCell
                   sx={{
-                    width: 1 / 2,
+                    width: this.state.showTags ? 1 / 3 : 1 / 2,
                     fontSize: "1.4rem",
                     backgroundColor: "rgb(0,0,0,0.20)",
                   }}
@@ -79,18 +108,33 @@ export default class Column extends Component {
             <TableBody>{wordRows}</TableBody>
             <TableFooter>
               <StyledTableRow>
+                {this.state.showTags ? (
+                  <TableCell
+                    sx={{
+                      margin: 0,
+                      padding: "0.6rem",
+                    }}
+                    align="center"
+                  />
+                ) : null}
                 <TableCell
                   align="center"
                   sx={{
                     fontSize: "1rem",
                     margin: 0,
-                    padding: 0,
+                    padding: "0.6rem",
                   }}
                 >
                   {this.props.language === "eng" ? "Pisteet: " : "Score: "}
                   {this.props.score}
                 </TableCell>
-                <TableCell align="center">
+                <TableCell
+                  sx={{
+                    margin: 0,
+                    padding: "0.6rem",
+                  }}
+                  align="center"
+                >
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
@@ -104,6 +148,39 @@ export default class Column extends Component {
                 </TableCell>
               </StyledTableRow>
               <StyledTableRow>
+                <TableCell align="center">
+                  <TextField
+                    id="standard-basic"
+                    autoComplete="off"
+                    placeholder={
+                      this.props.language === "eng"
+                        ? "Hae tagia"
+                        : "Search for a tag"
+                    }
+                    variant="standard"
+                    value={this.state.search}
+                    onChange={(e) => {
+                      e.preventDefault();
+                      this.setState({ search: e.target.value });
+                    }}
+                    inputProps={{
+                      style: { textAlign: "center", fontSize: "1rem" },
+                    }}
+                  ></TextField>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={this.state.showTags}
+                        onChange={(e) => {
+                          console.log(e.target.checked);
+                          this.setState({ showTags: e.target.checked });
+                        }}
+                      />
+                    }
+                    label="show tags"
+                    labelPlacement="start"
+                  />
+                </TableCell>
                 <TablePagination
                   rowsPerPage={5}
                   rowsPerPageOptions={[5]}
