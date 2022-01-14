@@ -10,6 +10,7 @@ router.get("/", async (req, res) => {
     let result = await connection.findAll();
     res.send(result);
   } catch (err) {
+    res.statusCode = 400;
     res.send(err);
   }
 });
@@ -52,7 +53,7 @@ router.put("/:index([0-9]+)", async (req, res) => {
     let result = await connection.editById(req.params.index, req.body);
     res.send(result);
   } catch (err) {
-    res.statusCode = 400;
+    res.statusCode = 404;
     res.send(err);
   }
 });
