@@ -44,7 +44,7 @@ let connectionFunctions = {
   },
   // Saves a word to the database
   save: (word) => {
-    const saveQuery = `INSERT INTO words (type, word, solution) VALUES (${word.tag},${word.english},${word.finnish})`;
+    const saveQuery = `INSERT INTO words (tag, english, finnish) VALUES ("${word.tag}","${word.english}","${word.finnish}")`;
 
     const validation = validator.validate(word, wordSchema);
 
