@@ -19,6 +19,7 @@ export default class App extends Component {
     };
     this.getWordsRequest = this.getWordsRequest.bind(this);
     this.editWordRequest = this.editWordRequest.bind(this);
+    this.deleteWordRequest = this.deleteWordRequest.bind(this);
     this.changeLanguage = this.changeLanguage.bind(this);
     this.addScore = this.addScore.bind(this);
   }
@@ -117,6 +118,25 @@ export default class App extends Component {
     }
   }
 
+  async deleteWordRequest(id) {
+    let words = this.state.words.filter((word) => word.id !== id);
+    this.setState({ words: words });
+
+    const request = {
+      method: "DELETE",
+    };
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/words/${id}`,
+        request
+      );
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   render() {
     return (
       <div className="content">
@@ -152,6 +172,7 @@ export default class App extends Component {
             words={this.state.words}
             language={this.state.language}
             editWord={this.editWordRequest}
+            deleteWord={this.deleteWordRequest}
           />
         )}
       </div>
