@@ -15,6 +15,7 @@ export default class Row extends Component {
     this.checkAnswer = this.checkAnswer.bind(this);
   }
 
+  // Checks if the user's given answer corresponds with the correct answer and adds points based on that, aswell as marking the row as correct or not
   async checkAnswer() {
     const solution =
       this.props.language === "eng"
@@ -41,6 +42,7 @@ export default class Row extends Component {
     }
   }
 
+  // Checks if the word was solved if the page got changed
   componentDidMount() {
     if (this.props.word.solved) {
       this.setState({ solution: this.props.word.solved });
@@ -48,12 +50,14 @@ export default class Row extends Component {
     }
   }
 
+  // If columns submit button is pressed then triggers checkAnswer function
   componentDidUpdate() {
     if (this.props.submit === true && this.state.correct === null) {
       this.checkAnswer();
     }
   }
 
+  // Renders the word for translation aswell as the answer textfield, if showTags is checked in column will also render the words tag
   render() {
     return (
       <TableRow>
