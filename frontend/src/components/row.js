@@ -68,8 +68,8 @@ export default class Row extends Component {
               backgroundColor:
                 this.state.correct !== null
                   ? this.state.correct
-                    ? "green"
-                    : "red"
+                    ? "rgb(30, 247, 88, 0.4)"
+                    : "rgb(247, 57, 57, 0.4)"
                   : "transparent",
             }}
             align="center"
@@ -83,8 +83,8 @@ export default class Row extends Component {
             backgroundColor:
               this.state.correct !== null
                 ? this.state.correct
-                  ? "green"
-                  : "red"
+                  ? "rgb(30, 247, 88, 0.4)"
+                  : "rgb(247, 57, 57, 0.4)"
                 : "transparent",
           }}
           align="center"
@@ -100,8 +100,8 @@ export default class Row extends Component {
             backgroundColor:
               this.state.correct !== null
                 ? this.state.correct
-                  ? "green"
-                  : "red"
+                  ? "rgb(30, 247, 88, 0.4)"
+                  : "rgb(247, 57, 57, 0.4)"
                 : "transparent",
           }}
           align="center"
