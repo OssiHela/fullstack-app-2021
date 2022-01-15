@@ -185,7 +185,9 @@ class AdminColumn extends Component {
                       },
                       native: true,
                     }}
-                    count={this.props.words.length}
+                    count={
+                      this.props.words.length > 0 ? this.props.words.length : 0
+                    }
                     page={this.state.page}
                     onPageChange={this.handleChangePage}
                   />
