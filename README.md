@@ -31,7 +31,14 @@ For heroku branch you don't need to install it, just run the heroku link in your
 
 ## Screenshots
 
-![Image](./screenshots/adminview.png?raw=true "Admin view")
+User view
+![Image](./screenshots/userview.png "User view")
+User view with checked rows
+![Image](./screenshots/userviewdone.png "User view with checked rows")
+User view with show tags and search
+![Image](./screenshots/userviewtags.png "User view with show tags and search")
+Admin view
+![Image](./screenshots/adminview.png "Admin view")
 
 ## How to use?
 
