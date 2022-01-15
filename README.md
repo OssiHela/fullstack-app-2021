@@ -31,7 +31,7 @@ For heroku branch you don't need to install it, just run the heroku link in your
 
 ## Screenshots
 
-![Alt text](/relative/screenshots/adminview.png?raw=true "Admin view")
+![Image](./screenshots/adminview.png?raw=true "Admin view")
 
 ## How to use?
 
