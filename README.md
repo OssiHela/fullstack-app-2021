@@ -12,7 +12,9 @@ Motivation for the project was getting a good grade for my backend course aswell
 ## Try it out!
 
 Heroku link: https://learnenglishfinnish.herokuapp.com/
-Screencast:
+Screencast link: https://youtu.be/4jJxqr2XlNE
+
+Screencast quality is not the best because of video editing app limitations.
 
 ## Documentation
 
@@ -24,10 +26,10 @@ The app can be used to learn simple and useful words both in English and Finnish
 
 ## Installation
 
-For the main branch, run "npm install" in root folder aswell as the frontend folder.
+For the main branch even if installing it wont work because of missing .env file, but to install run "npm install" in root folder aswell as the frontend folder.
 Then run "nodemon index.js" in the root folder and "npm start" in the frontend folder.
 
-For heroku branch you don't need to install it, just run the heroku link in your browser!
+For heroku branch you don't need to install it, just open the heroku link in your browser!
 
 ## Screenshots
 
