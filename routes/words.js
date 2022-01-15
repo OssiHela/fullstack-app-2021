@@ -4,7 +4,9 @@ var router = express.Router();
 
 router.use(express.json());
 
-// Returns all the words from the database
+/**
+ * Returns all the words from the database
+ */
 router.get("/", async (req, res) => {
   try {
     let result = await connection.findAll();
@@ -16,7 +18,9 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Returns a word with a certain id from the database
+/**
+ * Returns a word with a certain id from the database
+ */
 router.get("/:index([0-9]+)", async (req, res) => {
   try {
     let result = await connection.findById(req.params.index);
@@ -28,7 +32,9 @@ router.get("/:index([0-9]+)", async (req, res) => {
   }
 });
 
-// Deletes a word with a certain id from the database
+/**
+ * Deletes a word with a certain id from the database
+ */
 router.delete("/:index([0-9]+)", async (req, res) => {
   try {
     let result = await connection.deleteById(req.params.index);
@@ -40,7 +46,9 @@ router.delete("/:index([0-9]+)", async (req, res) => {
   }
 });
 
-// Adds a word to the database
+/**
+ * Adds a word to the database
+ */
 router.post("/", async (req, res) => {
   try {
     let result = await connection.save(req.body);
@@ -52,6 +60,9 @@ router.post("/", async (req, res) => {
   }
 });
 
+/**
+ * Edits a word in the database
+ */
 router.put("/:index([0-9]+)", async (req, res) => {
   try {
     let result = await connection.editById(req.params.index, req.body);
