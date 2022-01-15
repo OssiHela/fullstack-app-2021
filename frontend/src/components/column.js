@@ -199,8 +199,8 @@ class Column extends Component {
                     }
                     label={
                       this.props.language === "eng"
-                        ? "show tags"
-                        : "näytä tagit"
+                        ? "näytä tagit"
+                        : "show tags"
                     }
                     labelPlacement="start"
                   />
