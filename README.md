@@ -29,6 +29,10 @@ Then run "nodemon index.js" in the root folder and "npm start" in the frontend f
 
 For heroku branch you don't need to install it, just run the heroku link in your browser!
 
+## Screenshots
+
+![Alt text](/relative/screenshots/adminview.png?raw=true "Admin view")
+
 ## How to use?
 
 If you can speak english or finnish it is pretty straightforward how to use the app.
