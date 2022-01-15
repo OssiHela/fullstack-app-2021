@@ -197,7 +197,11 @@ class Column extends Component {
                         }}
                       />
                     }
-                    label="show tags"
+                    label={
+                      this.props.language === "eng"
+                        ? "show tags"
+                        : "näytä tagit"
+                    }
                     labelPlacement="start"
                   />
                 </TableCell>
@@ -210,7 +214,7 @@ class Column extends Component {
                     },
                     native: true,
                   }}
-                  count={this.props.words.length}
+                  count={wordRows.length > 0 ? wordRows.length : 0}
                   page={this.state.page}
                   onPageChange={this.handleChangePage}
                 />
