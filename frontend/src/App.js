@@ -109,7 +109,7 @@ class App extends Component {
    * Fetches the words from the backend
    */
   async getWordsRequest() {
-    const response = await fetch("http://localhost:8080/words");
+    const response = await fetch("/words");
     const data = await response.json();
     this.setState({ words: data });
   }
@@ -140,10 +140,7 @@ class App extends Component {
     };
 
     try {
-      const response = await fetch(
-        `http://localhost:8080/words/${newWord.id}`,
-        request
-      );
+      const response = await fetch(`/words/${newWord.id}`, request);
       console.log(response);
     } catch (err) {
       console.log(err);
@@ -170,7 +167,7 @@ class App extends Component {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(newWord),
         };
-        const response = await fetch(`http://localhost:8080/words/`, request);
+        const response = await fetch(`/words/`, request);
         await this.getWordsRequest();
         console.log(response);
       } catch (err) {
@@ -192,10 +189,7 @@ class App extends Component {
     };
 
     try {
-      const response = await fetch(
-        `http://localhost:8080/words/${id}`,
-        request
-      );
+      const response = await fetch(`/words/${id}`, request);
       console.log(response);
     } catch (err) {
       console.log(err);

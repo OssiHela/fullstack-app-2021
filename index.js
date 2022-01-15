@@ -18,7 +18,7 @@ var shutting_down = false;
 const words = require("./routes/words.js");
 
 app.use(cors());
-//app.use(express.static("frontend/build"));
+app.use(express.static("frontend/build"));
 
 app.use("/words", words.wordRouter);
 
