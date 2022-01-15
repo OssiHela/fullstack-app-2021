@@ -214,7 +214,7 @@ class Column extends Component {
                     },
                     native: true,
                   }}
-                  count={this.search() > 0 ? this.search() : 0}
+                  count={this.props.words > 0 ? this.search() : 0}
                   page={this.state.page}
                   onPageChange={this.handleChangePage}
                 />
