@@ -5,7 +5,7 @@ const app = express();
 /**
  * The port that the server runs on
  */
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 /**
  * Indicates if the server is shutting off
